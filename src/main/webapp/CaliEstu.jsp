@@ -56,8 +56,8 @@
                             </a>
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="listarEstu.jsp">Listar alumnos</a>
-                                    <a class="nav-link" href="regEstu.jsp">Agregar Alumnos</a>
+                                    <a class="nav-link" href="ListEstu.jsp">Listar alumnos</a>
+                                    <a class="nav-link" href="RegEstu.jsp">Agregar Alumnos</a>
                                 </nav>
                             </div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
@@ -68,16 +68,11 @@
                             <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
                                     <a class="nav-link" href="CaliEstu.jsp">Calificar alumnos</a>
-                                    <a class="nav-link" href="layout-sidenav-light.html">Modificar calificacion</a>
                                 </nav>
                             </div>
-                            <a class="nav-link" href="tables.html">
+                            <a class="nav-link" href="ListMat.jsp">
                                 <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
                                 Materias
-                            </a>
-                            <a class="nav-link" href="tables.html">
-                                <div class="sb-nav-link-icon"><i class="fas fa-swatchbook"></i></div>
-                                Grados
                             </a>
                         </div>
                     </div>
@@ -180,9 +175,9 @@
                         <div class="d-flex align-items-center justify-content-between small">
                             <div class="text-muted">Copyright &copy; Sistema de notas 2022</div>
                             <div>
-                                <a href="#">Privacy Policy</a>
+                                <a href="#">Politicas de Privacidad</a>
                                 &middot;
-                                <a href="#">Terms &amp; Conditions</a>
+                                <a href="#">Terminos &amp; Condiciones</a>
                             </div>
                         </div>
                     </div>

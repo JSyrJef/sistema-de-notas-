@@ -14,35 +14,38 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class IngresoNotas
+ * Servlet implementation class registroMaterias
  */
-@WebServlet("/registro_calificacion_alumno")
-public class IngresoNotas extends HttpServlet {
+@WebServlet("/registro_materia")
+public class registroMaterias extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String alumno = request.getParameter("Insertalumno");
-		int idalumno = Integer.parseInt(alumno);
-		String materia = request.getParameter("Insertmateria");
-		int idmateria = Integer.parseInt(materia);
-		String evaluacion = request.getParameter("Insertevaluacion");
-		int idevaluacion = Integer.parseInt(evaluacion);
-		String nota = request.getParameter("Insertnota");
-		float floatnota = Float.parseFloat(nota);
+		String mat = request.getParameter("InsertMateria");
+		String grado = request.getParameter("InsertG");
+		int idgra = Integer.parseInt(grado);
 		RequestDispatcher dispatcher = null;
 		Connection con = null;
+		
+		if(mat == null || mat.equals("")) {
+            request.setAttribute("status", "invalidlist");
+            dispatcher = request.getRequestDispatcher("listarMaterias.jsp");
+            dispatcher.forward(request,response);
+        }
+		if(grado== null || grado.equals("")) {
+            request.setAttribute("status", "invalidnom");
+            dispatcher = request.getRequestDispatcher("listarMaterias.jsp");
+            dispatcher.forward(request,response);
+        }
         
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 				con = DriverManager.getConnection("jdbc:mysql://192.168.1.11:33060/bd_notas?useSSL=false","root","secret");
-			PreparedStatement pst = con.prepareStatement("insert into registro_notas(nota,id_alumno,id_materia,id_evaluacion) values(?,?,?,?)");
-			pst.setFloat(1, floatnota);
-			pst.setInt(2, idalumno);
-			pst.setInt(3, idmateria);
-			pst.setInt(4,idevaluacion);
+			PreparedStatement pst = con.prepareStatement("insert into materia(materia,id_grado) values(?,?) ");
+			pst.setString(1, mat);
+			pst.setInt(2, idgra);
 			int rowCount = pst.executeUpdate();
-			dispatcher = request.getRequestDispatcher("CaliEstu.jsp");
+			dispatcher = request.getRequestDispatcher("listarMaterias.jsp");
 			if(rowCount > 0 ) {
 				request.setAttribute("status", "success");
 			}else {
@@ -60,7 +63,6 @@ public class IngresoNotas extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-		
 	}
 
 }

@@ -1,3 +1,4 @@
+<%@page import="java.sql.*" %>
 <%
 	if(session.getAttribute("name")==null){
 		response.sendRedirect("login.jsp");
@@ -75,51 +76,104 @@
                             </a>
                         </div>
                     </div>
-                     <div class="sb-sidenav-footer">
-                     <a class="nav-link" href="RegUser.jsp">
-						<i class="fas fa-user-friends"></i> Nuevo usuario
-                      </a>
-                    </div>
                 </nav>
             </div>
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">Home</h1>
+                        <h1 class="mt-4">Materias</h1>
                         <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active">Herramientas</li>
+                            <li class="breadcrumb-item active">Listado de materias en el sistemas</li>
                         </ol>
-                        <div class="row">
-                            <div class="col-xl-3 col-md-6">
-                                <div class="card bg-primary text-white mb-4">
-                                    <div class="card-body"><h1 class="display-4">Estudiantes</h1></div>
-                                    <img src="imagenes/graduado.png" class="img-fluid" alt="responsive-image" style="width:100px;">
-                                    <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="ListEstu.jsp">Acceder</a>
-                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                                    </div>
+                        <div>
+                        	<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+  Agregar materia nueva
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Materia a Ingresar</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form method="post" action="registro_materia" class="register-form" id="register-form" style="padding: 10px;">
+                                <div class="form-group">
+                                  <label for="InsertMateria">Materia</label>
+                                  <input type="text" class="form-control" id="InsertMateria" name="InsertMateria" placeholder="Nombre de la materia" required="required">
                                 </div>
-                            </div>
-                            <div class="col-xl-3 col-md-6">
-                                <div class="card bg-warning text-white mb-4">
-                                    <div class="card-body"><h1 class="display-4">Calificaciones</h1></div>
-                                    <img src="imagenes/calificacion.png" class="img-fluid" alt="responsive-image" style="width:100px;">
-                                    <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="CaliEstu.jsp">Acceder</a>
-                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                                    </div>
+                                <div class="form-group mt-3 mb-3">
+                                    <label for="InsertG">Grado</label>
+                                    <select name="InsertG" class="custom-select" required="required">
+                                        <option value="1">Primero</option>
+                                        <option value="2">Segundo</option>
+                                        <option value="3">Tercero</option>
+                                        <option value="4">Cuarto</option>
+                                        <option value="5">Quinto</option>
+                                        <option value="6">Sexto</option>
+                                        <option value="7">Septimo</option>
+                                        <option value="8">Octavo</option>
+                                        <option value="9">Noveno</option>
+                                    </select>
                                 </div>
-                            </div>
-                            <div class="col-xl-3 col-md-6">
-                                <div class="card bg-success text-white mb-4">
-                                    <div class="card-body"><h1 class="display-4">Materias</h1></div>
-                                    <img src="imagenes/educacion.png" class="img-fluid" alt="responsive-image" style="width:100px;">
-                                    <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="ListMat.jsp">Acceder</a>
-                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                                    </div>
-                                </div>
-                            </div>
+                                <div class="form-group form-button">
+								<input type="submit" name="signup" id="signup"
+									class="form-submit" value="Registrar" />
+								</div>
+                              </form>
+      </div>
+    </div>
+  </div>
+</div>
+                        </div>
+                         <%
+                        //Conexion BD
+                        Class.forName("com.mysql.jdbc.Driver");
+            			Connection con = DriverManager.getConnection("jdbc:mysql://192.168.1.11:33060/bd_notas?useSSL=false","root","secret");
+            			//Listar datos
+            			PreparedStatement ps;
+            			ResultSet rs;
+            			String sql = "select id_materia,materia,grado from materia inner join grados on materia.id_grado = grados.id_grado";
+            			ps = con.prepareStatement(sql);
+            			rs = ps.executeQuery(); 
+                        //listado
+                        %>
+                        <div class="card-body" style="display: inline-block;">
+                            <table class="table table-bordered">
+                                <thead class="thead-dark">
+                                  <tr>
+                                    <th scope="col">Materia</th>
+                                    <th scope="col">Grado Impartido</th>
+                                    <th scope="col">Opciones</th>
+                                  </tr>
+                                </thead>
+                                <%
+                                	while(rs.next()){
+                                
+                                %>
+                                <tbody>
+                                  <tr>
+                                  <input type="hidden" id="status" value="<%= rs.getInt(1)%>"/>     
+                                    <td><%= rs.getString(2)%></td>
+                                    <td><%= rs.getString(3)%></td>
+                        <td>
+                        <div>
+                        	 <a  href="ElimMat.jsp?idMateria=<%= rs.getInt(1)%>"><button type="button" class="btn btn-primary"><i class='fas fa-trash-alt'></i></button></a>
+                        </div>
+                        </td>
+                        
+                                  </tr>
+                                </tbody>
+                                
+                                <%
+                                	}
+                                %>
+                            </table>
                         </div>
                     </div>
                 </main>
@@ -137,11 +191,14 @@
                 </footer>
             </div>
         </div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="js-index/scripts.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
         <script src="assets/demo/chart-area-demo.js"></script>
         <script src="assets/demo/chart-bar-demo.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+    <script src="js-index/jquery/dist/jquery.slim.min.js"></script>
+    <script src="js-index/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js-index/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
     </body>
 </html>
