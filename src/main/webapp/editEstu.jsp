@@ -92,7 +92,7 @@
                             <%
                           //Conexion BD
                             Class.forName("com.mysql.jdbc.Driver");
-                			Connection con = DriverManager.getConnection("jdbc:mysql://192.168.1.11:33060/bd_notas?useSSL=false","root","secret");
+                			Connection con = DriverManager.getConnection("jdbc:mysql://192.168.1.13:33060/bd_notas?useSSL=false","root","secret");
                 			//modificar registro bajo su identificador
                 			PreparedStatement ps;
                 			ResultSet rs;

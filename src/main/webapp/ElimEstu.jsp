@@ -16,7 +16,7 @@
 	Statement sta=null;
 	try{
 		 Class.forName("com.mysql.jdbc.Driver");
-		 cnx = DriverManager.getConnection("jdbc:mysql://192.168.1.11:33060/bd_notas?useSSL=false","root","secret");
+		 cnx = DriverManager.getConnection("jdbc:mysql://192.168.1.13:33060/bd_notas?useSSL=false","root","secret");
 		 
 		 sta=cnx.createStatement();
 		 

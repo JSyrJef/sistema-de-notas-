@@ -29,23 +29,23 @@ public class registroMaterias extends HttpServlet {
 		
 		if(mat == null || mat.equals("")) {
             request.setAttribute("status", "invalidlist");
-            dispatcher = request.getRequestDispatcher("listarMaterias.jsp");
+            dispatcher = request.getRequestDispatcher("ListMat.jsp");
             dispatcher.forward(request,response);
         }
 		if(grado== null || grado.equals("")) {
             request.setAttribute("status", "invalidnom");
-            dispatcher = request.getRequestDispatcher("listarMaterias.jsp");
+            dispatcher = request.getRequestDispatcher("ListMat.jsp");
             dispatcher.forward(request,response);
         }
         
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-				con = DriverManager.getConnection("jdbc:mysql://192.168.1.11:33060/bd_notas?useSSL=false","root","secret");
+				con = DriverManager.getConnection("jdbc:mysql://192.168.1.13:33060/bd_notas?useSSL=false","root","secret");
 			PreparedStatement pst = con.prepareStatement("insert into materia(materia,id_grado) values(?,?) ");
 			pst.setString(1, mat);
 			pst.setInt(2, idgra);
 			int rowCount = pst.executeUpdate();
-			dispatcher = request.getRequestDispatcher("listarMaterias.jsp");
+			dispatcher = request.getRequestDispatcher("ListMat.jsp");
 			if(rowCount > 0 ) {
 				request.setAttribute("status", "success");
 			}else {

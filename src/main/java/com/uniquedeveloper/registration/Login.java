@@ -41,7 +41,7 @@ public class Login extends HttpServlet {
 		
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			Connection con = DriverManager.getConnection("jdbc:mysql://192.168.1.11:33060/bd_notas?useSSL=false","root","secret");
+			Connection con = DriverManager.getConnection("jdbc:mysql://192.168.1.13:33060/bd_notas?useSSL=false","root","secret");
 			PreparedStatement pst = con.prepareStatement("select * from users where username = ? and upwd= ?");
 			pst.setString(1, username);
 			pst.setString(2, upwd);

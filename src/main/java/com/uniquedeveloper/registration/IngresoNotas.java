@@ -35,7 +35,7 @@ public class IngresoNotas extends HttpServlet {
         
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-				con = DriverManager.getConnection("jdbc:mysql://192.168.1.11:33060/bd_notas?useSSL=false","root","secret");
+				con = DriverManager.getConnection("jdbc:mysql://192.168.1.13:33060/bd_notas?useSSL=false","root","secret");
 			PreparedStatement pst = con.prepareStatement("insert into registro_notas(nota,id_alumno,id_materia,id_evaluacion) values(?,?,?,?)");
 			pst.setFloat(1, floatnota);
 			pst.setInt(2, idalumno);

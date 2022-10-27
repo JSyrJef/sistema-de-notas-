@@ -81,7 +81,7 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">Calificar</h1>
+                        <h1 class="mt-4">Calificaciones</h1>
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item active">Ingreso de notas</li>
                         </ol>
@@ -93,7 +93,7 @@
                                 <%
                         //Conexion BD
                         Class.forName("com.mysql.jdbc.Driver");
-            			Connection con = DriverManager.getConnection("jdbc:mysql://192.168.1.11:33060/bd_notas?useSSL=false","root","secret");
+            			Connection con = DriverManager.getConnection("jdbc:mysql://192.168.1.13:33060/bd_notas?useSSL=false","root","secret");
             			//Listar datos
             			PreparedStatement ps;
             			ResultSet rs;

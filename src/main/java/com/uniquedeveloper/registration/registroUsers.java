@@ -59,7 +59,7 @@ public class registroUsers extends HttpServlet {
         
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-				con = DriverManager.getConnection("jdbc:mysql://192.168.1.11:33060/bd_notas?useSSL=false","root","secret");
+				con = DriverManager.getConnection("jdbc:mysql://192.168.1.13:33060/bd_notas?useSSL=false","root","secret");
 			PreparedStatement pst = con.prepareStatement("insert into users(username,upwd,uname,ulastname,rol) values(?,?,?,?,?) ");
 			pst.setString(1, userU);
 			pst.setString(2, pwdU);
